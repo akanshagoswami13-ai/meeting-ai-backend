@@ -1,10 +1,17 @@
+from fastapi.middleware.cors import CORSMiddleware
 import os
 from fastapi import FastAPI, UploadFile, File
 from openai import OpenAI
 
 # ✅ Create app FIRST
 app = FastAPI()
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 # ✅ OpenAI client
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
