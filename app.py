@@ -1,9 +1,12 @@
+@app.get("/")
+def home():
+    return {"message": "Backend is running successfully 🚀"}
+import os
 from fastapi import FastAPI, UploadFile, File
 from openai import OpenAI
 
 app = FastAPI()
-client = OpenAI(api_key="YOUR_OPENAI_KEY")
-
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 @app.post("/upload")
 async def upload(file: UploadFile = File(...)):
     audio = await file.read()
